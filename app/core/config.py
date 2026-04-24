@@ -25,11 +25,10 @@ class Settings(BaseSettings):
     # It will read CSV_FILE_PATH from the .env file
     csv_file_path: str
     
-    # Inner Config class used to customize behavior of BaseSettings
-    class Config:
-        
-        # Tells Pydantic to load environment variables from a file named ".env"
-        env_file = ".env"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8"
+    )
     
 # Creates an instance of Settings class
 # When this line runs:
