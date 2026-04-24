@@ -24,7 +24,7 @@ class CSVHandler:
         
         # Ensures that the CSV file exists
         # If not, it will be created with headers
-        self.ensure_file_exists()
+        self._ensure_file_exists()  # ✅ FIXED: added underscore
         
     # Private method (indicated by underscore)
     # This is used internally inside the class only
@@ -103,5 +103,3 @@ class CSVHandler:
                 # Write each row into the CSV file
                 # - Each row in written as a new line in the file
                 writer.writerow(row)
-                
-            
