@@ -1,7 +1,7 @@
 # Import BaseSettings from Pydantic
 # BaseSettings is a special class used to read environment variables
 # and automatically map them to Python variables
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 # Create a Settings class that inherits from BaseSettings
 # This class will automatically read values from environment variables
