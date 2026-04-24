@@ -1,0 +1,44 @@
+# Specifies the Docker Compose file format version
+version: "3.9"
+
+services:
+
+  # Name of the service (reference it internally by this name)
+  expense-tracker:
+
+    # Build the Docker image using the Dockerfile in the current directory
+    build: .
+
+    # Custom name for the running container
+    container_name: expense-tracker-app
+
+    # Map port 8000 on host -> port 8000 in container (host:container)
+    ports:
+      - "8000:8000"
+    
+    # Mount local 'data' folder into container's /app/data
+    # This allows persistent storage (data won't be lost on restart)
+    volumes:
+      - ./data:/app/data
+
+    # Load environment variables from .env file into the container
+    env_file:
+      - .env
+
+    # Automatically restart container unless manually stopped
+    restart: unless-stopped
+
+    # Override default CMD from Dockerfile
+    command: >
+
+      # Start FastAPI app
+      uvicorn app.main:app
+
+        # Make it accessible from outside the container
+        --host 0.0.0.0
+
+        # Run on port 8000
+        --port 8000
+
+        # Enable auto-reload (use for development only)
+        --reload
